@@ -10,8 +10,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isPressed = false;
-  int pressedIndex = -1;
-  List<int>indeices = [];
+  List<int>indexPressed = [];
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -36,18 +35,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        actions: const [
-          Icon(Icons.add,
-            color: Colors.black,
+        actions:  [
+          IconButton(
+            onPressed: () { },
+            icon: const Icon(Icons.add,
+              color: Colors.black,
+            ),
+
           ),
-          SizedBox(
-            width: 15.0,
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Icon(Icons.message,
-              color: Colors.black,),
-          ),
+
+           IconButton(
+             icon: const Icon(Icons.message,
+               color: Colors.black,), onPressed: () { },
+           ),
         ],
       ),
       body: Padding(
@@ -63,24 +63,26 @@ class _HomeScreenState extends State<HomeScreen> {
                itemBuilder: (_,index){
                  return  Padding(
                    padding: const EdgeInsets.only(right: 15),
-                   child: CategoryBtn(text: '#trending', isPressed: (isPressed&&indeices.contains(index)), onPressed: (){
+                   child: CategoryBtn(text: '#trending', isPressed: (isPressed&&indexPressed.contains(index)), onPressed: (){
                      setState(() {
                        isPressed = true;
-                       pressedIndex = index;
-                       indeices.add(index);
+                       indexPressed.add(index);
                      });
                    }),
                  );
                },
              ),
            ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Center(
               child: Wrap(
                 runSpacing: 20,
                 spacing: 15,
                 children: List.generate(10, (index) => buildItem(context)),
               ),
+            ),
+            const SizedBox(
+              height: 40.0,
             ),
           ],
         )),
@@ -110,13 +112,13 @@ Widget buildItem(BuildContext context) => Container(
       Container(
         height: MediaQuery.of(context).size.height*0.22,
         width: MediaQuery.of(context).size.width*0.45,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
           ),
           image: DecorationImage(
-            image: AssetImage('assets/image/omar.jpg'),fit: BoxFit.cover,
+            image: AssetImage('assets/image/enemy.jpg'),fit: BoxFit.cover,
           ),
         ),
       ),
